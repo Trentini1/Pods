@@ -10,11 +10,8 @@
 </head>
 <body> <div id="admin-bar" class="admin-bar">
         <div class="container">
-            <span>Modo Administrador</span>
-            <div>
-                <button id="save-stock-button" class="action-button">Salvar Estoque</button>
-                <button id="logout-button" class="action-button secondary">Sair</button>
-            </div>
+            <span>Modo de Edição de Estoque</span>
+            <button id="save-and-exit-button" class="action-button">Salvar Estoque e Sair</button>
         </div>
     </div>
     
@@ -48,26 +45,22 @@
     <div id="login-modal" class="modal-overlay">
         <div class="login-box">
             <h3>Acesso Administrativo</h3>
+            <p>Digite a senha para gerenciar o estoque.</p>
             <input type="password" id="password-input" placeholder="Senha">
-            <button id="login-button" class="action-button">Entrar</button>
-            <button id="close-login-modal" class="close-button">&times;</button>
+            <button id="login-submit-button" class="action-button">Entrar</button>
+            <button id="login-close-button" class="login-close-btn">&times;</button>
         </div>
     </div>
     
     <div id="cart-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Seu Carrinho</h2>
-            <div id="cart-items"></div>
-            <div class="cart-summary"><p>Total: <span id="cart-total-price">R$0,00</span></p></div>
-            <button id="checkout-button" class="action-button"><i class="fab fa-whatsapp"></i> Finalizar Compra</button>
-        </div>
+        <div class="modal-content"><span class="close-button">&times;</span><h2>Seu Carrinho</h2><div id="cart-items"></div><div class="cart-summary"><p>Total: <span id="cart-total-price">R$0,00</span></p></div><button id="checkout-button" class="action-button"><i class="fab fa-whatsapp"></i> Finalizar Compra</button></div>
     </div>
+    
     <a href="https://wa.me/5541995252161?text=Olá!%20Vim%20pelo%20site%20da%20Vip%20Pods" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
     <footer>
         <p>Desenvolvido por Trentini 2025</p>
-        <button id="admin-login-button">Admin</button>
+        <button id="open-admin-login-button">Acesso ADM</button>
     </footer>
 
     <script src="js/cart.js"></script>
