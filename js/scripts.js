@@ -1,93 +1,66 @@
 // --- CONFIGURAÇÕES ---
-const FIREBASE_URL = 'https://vip-pods-estoque-default-rtdb.firebaseio.com/'; // CONFIRME SE SUA URL ESTÁ CORRETA
-const ADMIN_PASSWORD = 'Trentini7'; // MUDE PARA UMA SENHA SEGURA E CONFIRME SE ESTÁ IGUAL A QUE VOCÊ DIGITA
+const FIREBASE_URL = 'https://vip-pods-estoque-default-rtdb.firebaseio.com/stock.json'; // CONFIRME SE SUA URL ESTÁ CORRETA
+const ADMIN_PASSWORD = 'vip'; // MUDE PARA UMA SENHA SEGURA
 
 // --- INICIALIZAÇÃO ---
 document.addEventListener('DOMContentLoaded', () => {
     loadProductsAndSetupTabs();
-    setupModal();
-    setupAdminLogin();
+    setupModal(); // Modal do Carrinho
+    setupAdminFeature(); // Configura o login de admin
 });
 
-// --- LÓGICA DO MODO ADMIN (VERSÃO MELHORADA) ---
-function setupAdminLogin() {
-    console.log("Sistema de Admin iniciado."); // Diagnóstico
-    const adminLoginButton = document.getElementById('admin-login-button');
+// --- LÓGICA DE ADMIN (TUDO REESCRITO) ---
+function setupAdminFeature() {
+    const openLoginBtn = document.getElementById('open-admin-login-button');
     const loginModal = document.getElementById('login-modal');
-    const closeLoginModalButton = document.getElementById('close-login-modal');
-    const loginButton = document.getElementById('login-button');
+    const closeLoginBtn = document.getElementById('login-close-button');
+    const loginSubmitBtn = document.getElementById('login-submit-button');
     const passwordInput = document.getElementById('password-input');
-    const saveStockButton = document.getElementById('save-stock-button');
-    const logoutButton = document.getElementById('logout-button');
+    const saveAndExitButton = document.getElementById('save-and-exit-button');
 
-    // Garante que os botões existem antes de adicionar eventos
-    if (adminLoginButton) {
-        adminLoginButton.addEventListener('click', () => {
-            loginModal.style.display = 'flex';
-        });
-    }
+    openLoginBtn.addEventListener('click', () => {
+        loginModal.style.display = 'flex';
+    });
 
-    if (closeLoginModalButton) {
-        closeLoginModalButton.addEventListener('click', () => {
+    closeLoginBtn.addEventListener('click', () => {
+        loginModal.style.display = 'none';
+    });
+
+    loginSubmitBtn.addEventListener('click', () => {
+        if (passwordInput.value === ADMIN_PASSWORD) {
+            passwordInput.value = '';
             loginModal.style.display = 'none';
-        });
-    }
+            enterAdminMode();
+        } else {
+            alert('Senha incorreta.');
+        }
+    });
 
-    if (loginButton) {
-        loginButton.addEventListener('click', () => {
-            console.log("Botão de Login clicado."); // Diagnóstico
-            if (passwordInput.value === ADMIN_PASSWORD) {
-                console.log("Senha correta! Ativando modo admin..."); // Diagnóstico
-                document.body.classList.add('admin-logged-in');
-                loginModal.style.display = 'none';
-                passwordInput.value = '';
-                setupAdminControls();
-                console.log("Modo admin ativado com sucesso."); // Diagnóstico
-            } else {
-                console.log("Senha incorreta digitada."); // Diagnóstico
-                alert('Senha incorreta!');
-            }
-        });
-    }
-
-    if (saveStockButton) {
-        saveStockButton.addEventListener('click', saveAllStock);
-    }
-    
-    if (logoutButton) {
-        logoutButton.addEventListener('click', () => {
-            document.body.classList.remove('admin-logged-in');
-            // Recarregar a página é a forma mais simples de garantir que tudo volte ao normal
-            window.location.reload();
-        });
-    }
+    saveAndExitButton.addEventListener('click', saveStockAndExit);
 }
 
-function setupAdminControls() {
-    const stockChangeButtons = document.querySelectorAll('.stock-change-btn');
-    stockChangeButtons.forEach(button => {
-        // Remove eventuais listeners antigos para evitar duplicação
-        const newButton = button.cloneNode(true);
-        button.parentNode.replaceChild(newButton, button);
-
-        newButton.addEventListener('click', () => {
-            const card = newButton.closest('.product-card');
+function enterAdminMode() {
+    document.body.classList.add('admin-logged-in');
+    
+    // Adiciona os eventos de clique nos botões + e -
+    document.querySelectorAll('.stock-change-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const card = button.closest('.product-card');
             const stockCountEl = card.querySelector('.stock-count');
-            const change = parseInt(newButton.dataset.change, 10);
+            const change = parseInt(button.dataset.change, 10);
             
             let currentStock = parseInt(stockCountEl.textContent, 10);
             currentStock += change;
             if (currentStock < 0) currentStock = 0;
 
             stockCountEl.textContent = currentStock;
-            card.dataset.stock = currentStock;
+            card.dataset.stock = currentStock; // Atualiza o valor para salvar depois
         });
     });
-    console.log("Controles de estoque (+) e (-) configurados."); // Diagnóstico
 }
 
-async function saveAllStock() {
-    const saveButton = document.getElementById('save-stock-button');
+async function saveStockAndExit() {
+    const saveButton = document.getElementById('save-and-exit-button');
     saveButton.textContent = 'Salvando...';
     saveButton.disabled = true;
 
@@ -104,17 +77,20 @@ async function saveAllStock() {
             headers: { 'Content-Type': 'application/json' }
         });
         if (!response.ok) throw new Error('Falha ao salvar no Firebase');
+        
         alert('Estoque atualizado com sucesso!');
+        // Sai do modo admin e recarrega a página para mostrar o resultado final
+        window.location.reload();
+
     } catch (error) {
         console.error("Erro ao salvar o estoque:", error);
         alert("Ocorreu um erro ao salvar. Verifique o console.");
-    } finally {
-        saveButton.textContent = 'Salvar Estoque';
+        saveButton.textContent = 'Salvar Estoque e Sair';
         saveButton.disabled = false;
     }
 }
 
-// --- RESTANTE DO CÓDIGO (PERMANECE O MESMO) ---
+// --- LÓGICA DA LOJA (CÓDIGO ANTERIOR, SEM ALTERAÇÕES SIGNIFICATIVAS) ---
 
 async function loadProductsAndSetupTabs() {
     try {
@@ -123,9 +99,12 @@ async function loadProductsAndSetupTabs() {
             fetch(FIREBASE_URL)
         ]);
         if (!productsResponse.ok) throw new Error('Falha ao carregar products.json');
+        
         const productData = await productsResponse.json();
         const stockData = stockResponse.ok ? await stockResponse.json() || {} : {};
+
         const brandToTabId = {'BLACK SHEEP 20k': 'black-sheep', 'ELF BAR TE 30k': 'elf-bar', 'ELF BAR GH23k': 'elf-bar', 'SEX ADDICT S280k': 'sex-addict', 'IGNITE V80': 'ignite'};
+        
         productData.forEach(brandData => {
             const tabId = brandToTabId[brandData.brand];
             const container = document.getElementById(tabId);
@@ -146,10 +125,21 @@ async function loadProductsAndSetupTabs() {
 
 function createProductCardHTML(brandData, product, stockCount) {
     const isOutOfStock = stockCount <= 0;
-    const buttonHTML = isOutOfStock
+    const customerButton = isOutOfStock
         ? `<button class="action-button out-of-stock" disabled>Sem Estoque</button>`
         : `<button class="action-button add-to-cart-button" onclick="addToCart('${brandData.brand} - ${product.name}', ${brandData.price})">Adicionar ao Carrinho</button>`;
-    return `<div class="product-card" data-id="${product.id}" data-stock="${stockCount}"><h4>${product.name}</h4><p class="price">R$${brandData.price.toFixed(2).replace('.', ',')}</p>${buttonHTML}<div class="admin-stock-controls"><button class="stock-change-btn" data-change="-1">-</button><span class="stock-count">${stockCount}</span><button class="stock-change-btn" data-change="1">+</button></div></div>`;
+    
+    return `
+        <div class="product-card" data-id="${product.id}" data-stock="${stockCount}">
+            <h4>${product.name}</h4>
+            <p class="price">R$${brandData.price.toFixed(2).replace('.', ',')}</p>
+            ${customerButton}
+            <div class="admin-stock-controls">
+                <button class="stock-change-btn" data-change="-1">-</button>
+                <span class="stock-count">${stockCount}</span>
+                <button class="stock-change-btn" data-change="1">+</button>
+            </div>
+        </div>`;
 }
 
 function setupTabs() {
@@ -161,7 +151,7 @@ function setupTabs() {
             tabPanels.forEach(p => p.classList.remove('active'));
             link.classList.add('active');
             const targetPanel = document.getElementById(link.dataset.tab);
-            if (targetPanel) targetPanel.classList.add('active');
+            if(targetPanel) targetPanel.classList.add('active');
         });
     });
     if (tabLinks.length > 0) tabLinks[0].click();
@@ -169,7 +159,7 @@ function setupTabs() {
 
 function setupModal() {
     const cartModal = document.getElementById('cart-modal');
-    const modalContent = document.querySelector('.modal-content');
+    const modalContent = cartModal.querySelector('.modal-content');
     const cartIcon = document.querySelector('.cart-icon');
     const closeButton = cartModal.querySelector('.close-button');
     const checkoutButton = document.getElementById('checkout-button');
