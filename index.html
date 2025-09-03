@@ -8,8 +8,16 @@
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body>
-
+<body> <div id="admin-bar" class="admin-bar">
+        <div class="container">
+            <span>Modo Administrador</span>
+            <div>
+                <button id="save-stock-button" class="action-button">Salvar Estoque</button>
+                <button id="logout-button" class="action-button secondary">Sair</button>
+            </div>
+        </div>
+    </div>
+    
     <div class="smoke-background"></div>
 
     <header class="fade-in">
@@ -24,52 +32,42 @@
 
     <main class="container">
         <nav class="tabs-nav fade-in-up">
-            <button class="tab-link active highlighted" data-tab="black-sheep">
-                <i class="fas fa-star"></i> Black Sheep
-            </button>
-            <button class="tab-link highlighted" data-tab="elf-bar">
-                <i class="fas fa-star"></i> Elf Bar
-            </button>
-            <button class="tab-link highlighted" data-tab="ignite">
-                <i class="fas fa-star"></i> Ignite
-            </button>
-            <button class="tab-link" data-tab="sex-addict">
-                Sex Addict
-            </button>
+            <button class="tab-link active highlighted" data-tab="black-sheep"><i class="fas fa-star"></i> Black Sheep</button>
+            <button class="tab-link highlighted" data-tab="elf-bar"><i class="fas fa-star"></i> Elf Bar</button>
+            <button class="tab-link highlighted" data-tab="ignite"><i class="fas fa-star"></i> Ignite</button>
+            <button class="tab-link" data-tab="sex-addict">Sex Addict</button>
         </nav>
-
         <section class="tabs-content">
-            <div id="black-sheep" class="tab-content-panel active">
-                </div>
-            <div id="elf-bar" class="tab-content-panel">
-                </div>
-            <div id="ignite" class="tab-content-panel">
-                </div>
-            <div id="sex-addict" class="tab-content-panel">
-                </div>
+            <div id="black-sheep" class="tab-content-panel active"></div>
+            <div id="elf-bar" class="tab-content-panel"></div>
+            <div id="ignite" class="tab-content-panel"></div>
+            <div id="sex-addict" class="tab-content-panel"></div>
         </section>
     </main>
 
+    <div id="login-modal" class="modal-overlay">
+        <div class="login-box">
+            <h3>Acesso Administrativo</h3>
+            <input type="password" id="password-input" placeholder="Senha">
+            <button id="login-button" class="action-button">Entrar</button>
+            <button id="close-login-modal" class="close-button">&times;</button>
+        </div>
+    </div>
+    
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h2>Seu Carrinho</h2>
             <div id="cart-items"></div>
-            <div class="cart-summary">
-                <p>Total: <span id="cart-total-price">R$0,00</span></p>
-            </div>
-            <button id="checkout-button" class="action-button">
-                <i class="fab fa-whatsapp"></i> Finalizar Compra
-            </button>
+            <div class="cart-summary"><p>Total: <span id="cart-total-price">R$0,00</span></p></div>
+            <button id="checkout-button" class="action-button"><i class="fab fa-whatsapp"></i> Finalizar Compra</button>
         </div>
     </div>
-    
-    <a href="https://wa.me/5541995252161?text=Olá!%20Vim%20pelo%20site%20da%20Vip%20Pods%20e%20gostaria%20de%20mais%20informações." class="whatsapp-float" target="_blank" aria-label="Contato via WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <a href="https://wa.me/5541995252161?text=Olá!%20Vim%20pelo%20site%20da%20Vip%20Pods" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
     <footer>
         <p>Desenvolvido por Trentini 2025</p>
+        <button id="admin-login-button">Admin</button>
     </footer>
 
     <script src="js/cart.js"></script>
