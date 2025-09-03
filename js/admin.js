@@ -1,8 +1,8 @@
 // ATENÇÃO: Cole a URL do seu Firebase Realtime Database aqui!
-const FIREBASE_URL = 'https://vip-pods-estoque-default-rtdb.firebaseio.com/stock.json'; // SUBSTITUA PELA SUA URL
+const FIREBASE_URL = 'https://vip-pods-estoque-default-rtdb.firebaseio.com/'; // SUBSTITUA PELA SUA URL
 
 // ATENÇÃO: Defina sua senha de administrador aqui!
-const ADMIN_PASSWORD = 'vip'; // MUDE PARA UMA SENHA SEGURA
+const ADMIN_PASSWORD = 'Trentini7'; // MUDE PARA UMA SENHA SEGURA
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginSection = document.getElementById('login-section');
