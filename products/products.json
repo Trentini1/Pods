@@ -3,66 +3,66 @@
         "brand": "BLACK SHEEP 20k",
         "price": 120.00,
         "products": [
-            { "name": "FRESH MINT/ GRAPE ❄🍇" },
-            { "name": "FRESH MINT/ watermelon ❄🍉" },
-            { "name": "GRAPE/ strawberry banana🍇🍓🍌" },
-            { "name": "Menthol/ watermelon ❄🍉" },
-            { "name": "Strawberry banana/ pine 🍓🍌🍭" },
-            { "name": "WINTERGREEN/ GRAPE 🍉🍓🍇" },
-            { "name": "GRAPE/ papaya lemon🍇🍋‍🟩🍋" }
+            { "id": "bs_fresh_mint_grape", "name": "FRESH MINT/ GRAPE ❄🍇" },
+            { "id": "bs_fresh_mint_watermelon", "name": "FRESH MINT/ watermelon ❄🍉" },
+            { "id": "bs_grape_strawberry_banana", "name": "GRAPE/ strawberry banana🍇🍓🍌" },
+            { "id": "bs_menthol_watermelon", "name": "Menthol/ watermelon ❄🍉" },
+            { "id": "bs_strawberry_banana_pine", "name": "Strawberry banana/ pine 🍓🍌🍭" },
+            { "id": "bs_wintergreen_grape", "name": "WINTERGREEN/ GRAPE 🍉🍓🍇" },
+            { "id": "bs_grape_papaya_lemon", "name": "GRAPE/ papaya lemon🍇🍋‍🟩🍋" }
         ]
     },
     {
         "brand": "ELF BAR TE 30k",
         "price": 106.90,
         "products": [
-            { "name": "Strawmelon peach🍓🍉🍑" },
-            { "name": "Cherry strazz🍒🌈" },
-            { "name": "Elf love🍬❤" },
-            { "name": "Menthol🥣❄" },
-            { "name": "Guava PASSION fruit kiwi🍇🥝" },
-            { "name": "Strawberry ice🍓❄" },
-            { "name": "Babbaloo tutii fruit 🍬🌈" }
+            { "id": "eb_te_strawmelon_peach", "name": "Strawmelon peach🍓🍉🍑" },
+            { "id": "eb_te_cherry_strazz", "name": "Cherry strazz🍒🌈" },
+            { "id": "eb_te_elf_love", "name": "Elf love🍬❤" },
+            { "id": "eb_te_menthol", "name": "Menthol🥣❄" },
+            { "id": "eb_te_guava_passion", "name": "Guava PASSION fruit kiwi🍇🥝" },
+            { "id": "eb_te_strawberry_ice", "name": "Strawberry ice🍓❄" },
+            { "id": "eb_te_babbaloo", "name": "Babbaloo tutii fruit 🍬🌈" }
         ]
     },
     {
         "brand": "SEX ADDICT S280k",
         "price": 104.90,
         "products": [
-            { "name": "Banana ice🍌❄" },
-            { "name": "Pineapple ice🍭❄" },
-            { "name": "Grape açaí 🍇🥣" },
-            { "name": "GREEN Apple 🍏" },
-            { "name": "Watermelon ice🍓❄" },
-            { "name": "Strawberry grape🍓🍇" },
-            { "name": "Menthol🍵❄" }
+            { "id": "sa_banana_ice", "name": "Banana ice🍌❄" },
+            { "id": "sa_pineapple_ice", "name": "Pineapple ice🍭❄" },
+            { "id": "sa_grape_acai", "name": "Grape açaí 🍇🥣" },
+            { "id": "sa_green_apple", "name": "GREEN Apple 🍏" },
+            { "id": "sa_watermelon_ice", "name": "Watermelon ice🍓❄" },
+            { "id": "sa_strawberry_grape", "name": "Strawberry grape🍓🍇" },
+            { "id": "sa_menthol", "name": "Menthol🍵❄" }
         ]
     },
     {
         "brand": "ELF BAR GH23k",
         "price": 110.00,
         "products": [
-            { "name": "strawberry banana ice🍓🍌❄" },
-            { "name": "Baja splash🍬🌈" },
-            { "name": "Blue razz ice🫐🍬❄" },
-            { "name": "Lime grapefruit ice🍋🍊❄" }
+            { "id": "eb_gh_strawberry_banana_ice", "name": "strawberry banana ice🍓🍌❄" },
+            { "id": "eb_gh_baja_splash", "name": "Baja splash🍬🌈" },
+            { "id": "eb_gh_blue_razz_ice", "name": "Blue razz ice🫐🍬❄" },
+            { "id": "eb_gh_lime_grapefruit_ice", "name": "Lime grapefruit ice🍋🍊❄" }
         ]
     },
     {
         "brand": "IGNITE V80",
         "price": 75.00,
         "products": [
-            { "name": "banana cherry🍒🍌" },
-            { "name": "banana ice🍌❄" },
-            { "name": "Blueberry ice🫐❄" },
-            { "name": "cactos 🌵" },
-            { "name": "grape fruit mint 🍇🍊🍃" },
-            { "name": "grape ice🍇❄" },
-            { "name": "ice mint❄🍃" },
-            { "name": "passion fruit sour kiwi🫒🍊🥝" },
-            { "name": "strawberry ice🍓❄" },
-            { "name": "strawberry kiwi 🍓🥝" },
-            { "name": "watermelon ice🍉" }
+            { "id": "ig_banana_cherry", "name": "banana cherry🍒🍌" },
+            { "id": "ig_banana_ice", "name": "banana ice🍌❄" },
+            { "id": "ig_blueberry_ice", "name": "Blueberry ice🫐❄" },
+            { "id": "ig_cactos", "name": "cactos 🌵" },
+            { "id": "ig_grape_fruit_mint", "name": "grape fruit mint 🍇🍊🍃" },
+            { "id": "ig_grape_ice", "name": "grape ice🍇❄" },
+            { "id": "ig_ice_mint", "name": "ice mint❄🍃" },
+            { "id": "ig_passion_fruit_sour_kiwi", "name": "passion fruit sour kiwi🫒🍊🥝" },
+            { "id": "ig_strawberry_ice", "name": "strawberry ice🍓❄" },
+            { "id": "ig_strawberry_kiwi", "name": "strawberry kiwi 🍓🥝" },
+            { "id": "ig_watermelon_ice", "name": "watermelon ice🍉" }
         ]
     }
 ]
