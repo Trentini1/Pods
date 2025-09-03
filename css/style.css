@@ -151,10 +151,10 @@ footer { text-align: center; padding: 25px 0; margin-top: 40px; background: var(
     transform: none; /* Remove o efeito de hover */
     background-color: #555;
 }
-/* --- ESTILOS DO MODO ADMIN --- */
+/* --- ESTILOS DO MODO ADMIN (VERSÃO CORRIGIDA E SIMPLIFICADA) --- */
 
 /* Botão de Login no Rodapé */
-footer #admin-login-button {
+footer #open-admin-login-button {
     background: none;
     border: 1px solid #555;
     color: #777;
@@ -164,40 +164,37 @@ footer #admin-login-button {
     margin-top: 10px;
     transition: all 0.3s ease;
 }
-footer #admin-login-button:hover {
+footer #open-admin-login-button:hover {
     color: white;
     border-color: white;
 }
 
 /* Janela (Modal) de Login */
 .modal-overlay {
-    display: none; /* Escondido por padrão */
+    display: none; /* Começa escondido */
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(5px);
-    z-index: 3000;
+    backdrop-filter: blur(8px);
+    z-index: 9999;
     justify-content: center;
     align-items: center;
 }
 .login-box {
-    background: #222;
-    padding: 30px;
+    background: #1e1e1e;
+    padding: 25px 30px;
     border-radius: 12px;
+    border: 1px solid #333;
     width: 90%;
     max-width: 350px;
     text-align: center;
     position: relative;
 }
-.login-box .close-button {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 2rem;
-    color: #777;
+.login-box p {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: -5px;
+    margin-bottom: 15px;
 }
 .login-box input {
     width: 100%;
@@ -209,13 +206,23 @@ footer #admin-login-button:hover {
     color: white;
     font-size: 1rem;
 }
+.login-close-btn { /* Seletor único para este botão */
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    color: #777;
+    cursor: pointer;
+}
 
 /* Barra de Admin no Topo */
 .admin-bar {
-    display: none; /* Escondida por padrão */
+    display: none; /* Começa escondido */
     background: var(--primary-color);
     color: white;
-    padding: 10px 0;
+    padding: 12px 0;
     position: fixed;
     top: 0;
     width: 100%;
@@ -228,25 +235,22 @@ footer #admin-login-button:hover {
     align-items: center;
 }
 .admin-bar .action-button {
-    padding: 8px 12px;
+    padding: 8px 15px;
     font-size: 0.9rem;
     margin-left: 10px;
 }
-.admin-bar .action-button.secondary {
-    background-color: #555;
-}
 
-/* Ajusta o site quando a barra de admin está visível */
+/* Ajustes de layout quando o admin está logado */
 body.admin-logged-in header {
-    top: 55px; /* Empurra o header para baixo */
+    top: 58px;
 }
 body.admin-logged-in main {
-    padding-top: 135px; /* (80px do header + 55px da barra) */
+    padding-top: 138px;
 }
 
-/* Controles de Estoque no Card do Produto */
+/* Controles de Estoque Visuais */
 .admin-stock-controls {
-    display: none; /* Escondido por padrão */
+    display: none;
     justify-content: center;
     align-items: center;
     gap: 15px;
@@ -261,6 +265,10 @@ body.admin-logged-in main {
     font-size: 1.5rem;
     border-radius: 50%;
     cursor: pointer;
+    transition: transform 0.2s;
+}
+.admin-stock-controls button:active {
+    transform: scale(0.9);
 }
 .admin-stock-controls span {
     font-size: 1.8rem;
@@ -270,16 +278,13 @@ body.admin-logged-in main {
 }
 
 /* LÓGICA DE VISIBILIDADE DO MODO ADMIN */
-/* Quando o admin loga, a classe .admin-logged-in é adicionada ao body */
-
 body.admin-logged-in .admin-bar {
-    display: block; /* Mostra a barra de admin */
+    display: block;
 }
-
-body.admin-logged-in .product-card .action-button {
-    display: none; /* Esconde o botão "Adicionar ao Carrinho" */
+body.admin-logged-in .product-card .action-button,
+body.admin-logged-in .product-card .out-of-stock {
+    display: none;
 }
-
 body.admin-logged-in .product-card .admin-stock-controls {
-    display: flex; /* Mostra os controles de estoque */
+    display: flex;
 }
