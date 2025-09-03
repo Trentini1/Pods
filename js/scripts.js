@@ -1,6 +1,6 @@
 // --- CONFIGURAÇÕES ---
-const FIREBASE_URL = 'https://vip-pods-estoque-default-rtdb.firebaseio.com/stock.json'; // CONFIRME SE SUA URL ESTÁ CORRETA
-const ADMIN_PASSWORD = 'vip'; // MUDE PARA UMA SENHA SEGURA E CONFIRME SE ESTÁ IGUAL A QUE VOCÊ DIGITA
+const FIREBASE_URL = 'https://vip-pods-estoque-default-rtdb.firebaseio.com/'; // CONFIRME SE SUA URL ESTÁ CORRETA
+const ADMIN_PASSWORD = 'Trentini7'; // MUDE PARA UMA SENHA SEGURA E CONFIRME SE ESTÁ IGUAL A QUE VOCÊ DIGITA
 
 // --- INICIALIZAÇÃO ---
 document.addEventListener('DOMContentLoaded', () => {
