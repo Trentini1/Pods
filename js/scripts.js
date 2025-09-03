@@ -5,9 +5,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function loadProducts() {
     fetch('products/products.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro de rede! Status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             const productsContainer = document.getElementById('products');
+            if (!productsContainer) {
+                console.error("Elemento 'products' não encontrado no DOM!");
+                return;
+            }
+
             data.forEach(brandData => {
                 let brandHTML = `<h3>${brandData.brand}</h3>`;
                 brandData.products.forEach(product => {
@@ -21,11 +31,19 @@ function loadProducts() {
                         </div>
                     `;
                 });
+                // Adiciona o HTML da marca e seus produtos de uma vez
                 productsContainer.innerHTML += brandHTML;
             });
+
+            // CHAME A FUNÇÃO DE ANIMAÇÃO AQUI!
+            // Isso garante que os cards de produto já existem quando a animação for configurada.
             setupIntersectionObserver();
         })
-        .catch(error => console.error('Erro ao carregar os produtos:', error));
+        .catch(error => {
+            console.error('Erro fatal ao carregar os produtos:', error);
+            // Mostra uma mensagem de erro para o usuário na tela
+            document.getElementById('products').innerHTML = '<p style="text-align:center; color:red;">Não foi possível carregar os produtos. Verifique o console para mais detalhes.</p>';
+        });
 }
 
 function setupModal() {
