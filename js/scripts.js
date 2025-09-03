@@ -1,6 +1,6 @@
 // --- CONFIGURAÇÕES ---
-const FIREBASE_URL = 'https://vip-pods-estoque-default-rtdb.firebaseio.com/stock.json'; // SUBSTITUA PELA SUA URL
-const ADMIN_PASSWORD = 'vip'; // MUDE PARA UMA SENHA SEGURA
+const FIREBASE_URL = 'https://vip-pods-estoque-default-rtdb.firebaseio.com/'; // SUBSTITUA PELA SUA URL
+const ADMIN_PASSWORD = 'Trentini7'; // MUDE PARA UMA SENHA SEGURA
 
 // --- INICIALIZAÇÃO ---
 document.addEventListener('DOMContentLoaded', () => {
