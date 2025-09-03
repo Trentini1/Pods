@@ -1,5 +1,5 @@
 // --- CONFIGURAÇÕES ---
-const FIREBASE_URL = 'https://vip-pods-estoque-default-rtdb.firebaseio.com/stock.json'; // CONFIRME SE SUA URL ESTÁ CORRETA
+const FIREBASE_URL = 'https://vip-pods-estoque-default-rtdb.firebaseio.com/'; // CONFIRME SE SUA URL ESTÁ CORRETA
 const ADMIN_PASSWORD = 'vip'; // MUDE PARA UMA SENHA SEGURA
 
 // --- INICIALIZAÇÃO ---
