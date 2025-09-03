@@ -6,13 +6,10 @@
     --text-color: #f4f4f4;
     --background-color: #121212;
     --card-background: rgba(25, 25, 25, 0.7);
+    --star-color: #ffeb3b;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Montserrat', sans-serif;
@@ -22,91 +19,78 @@ body {
 }
 
 .smoke-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
     background: url(https://www.transparenttextures.com/patterns/subtle-dark-matter.png);
-    animation: smoke-flow 60s linear infinite;
-    opacity: 0.15;
+    animation: smoke-flow 60s linear infinite; opacity: 0.15;
 }
 
-.container {
-    width: 90%;
-    margin: 0 auto;
-}
+.container { width: 90%; margin: 0 auto; }
 
 header {
-    background: rgba(0,0,0,0.6);
-    padding: 15px 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--secondary-color);
+    background: rgba(0,0,0,0.6); padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000;
+    backdrop-filter: blur(12px); border-bottom: 1px solid var(--secondary-color);
 }
+header .container { display: flex; justify-content: space-between; align-items: center; }
+header h1 { font-size: 1.7rem; color: var(--primary-color); font-weight: 700; }
 
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header h1 {
-    font-size: 1.7rem;
-    color: var(--primary-color);
-    font-weight: 700;
-}
-
-.cart-icon {
-    position: relative;
-    cursor: pointer;
-}
-
-.cart-icon i {
-    font-size: 1.5rem;
-    transition: transform 0.2s ease;
-}
-.cart-icon:hover i {
-    transform: scale(1.1);
-}
-
+.cart-icon { position: relative; cursor: pointer; }
+.cart-icon i { font-size: 1.5rem; transition: transform 0.2s ease; }
+.cart-icon:hover i { transform: scale(1.1); }
 #cart-count {
-    position: absolute;
-    top: -8px;
-    right: -10px;
-    background: red;
-    color: white;
-    border-radius: 50%;
-    padding: 3px 7px;
-    font-size: 0.7rem;
-    font-weight: bold;
+    position: absolute; top: -8px; right: -10px; background: red; color: white; border-radius: 50%;
+    padding: 3px 7px; font-size: 0.7rem; font-weight: bold;
 }
 
-main {
-    padding-top: 80px;
-}
+main { padding-top: 80px; }
 
-#hero {
-    text-align: center;
-    padding: 50px 0;
-}
-
-#hero h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-}
-
-#products h3 {
-    font-size: 1.8rem;
-    margin: 40px 0 20px 0;
+/* ESTILOS DAS ABAS */
+.tabs-nav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
     padding-bottom: 10px;
-    border-bottom: 2px solid var(--primary-color);
-    text-align: center;
+    overflow-x: auto; /* Permite rolar as abas na horizontal em telas pequenas */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE */
+}
+.tabs-nav::-webkit-scrollbar { display: none; /* Chrome, Safari */ }
+
+.tab-link {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0; /* Impede que os botões encolham */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.tab-link:hover {
+    background-color: #444;
+}
+.tab-link.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+.tab-link.highlighted .fa-star {
+    color: var(--star-color);
+}
+.tab-link:not(.active).highlighted {
+    border-color: var(--star-color);
+}
+
+.tab-content-panel {
+    display: none; /* Esconde os painéis por padrão */
+}
+.tab-content-panel.active {
+    display: block; /* Mostra apenas o painel ativo */
+    animation: fadeInScale 0.5s ease-out forwards;
 }
 
 .product-card {
@@ -117,170 +101,43 @@ main {
     margin-bottom: 25px;
     backdrop-filter: blur(8px);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0; /* Começa invisível para a animação */
+}
+.product-card.visible { /* Classe adicionada pelo JS para animar */
+    opacity: 1;
+    animation: fadeInScale 0.6s ease-out forwards;
 }
 .product-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 30px rgba(156, 39, 176, 0.2);
 }
 
-.product-card h4 {
-    font-size: 1.2rem;
-    color: var(--text-color);
-}
-
-.product-card .price {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #4CAF50;
-    margin: 10px 0 15px 0;
-}
+.product-card h4 { font-size: 1.2rem; color: var(--text-color); }
+.product-card .price { font-size: 1.5rem; font-weight: bold; color: #4CAF50; margin: 10px 0 15px 0; }
 
 .action-button {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    border: none;
-    padding: 14px;
-    width: 100%;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: bold;
+    background-color: var(--primary-color); color: var(--text-color); border: none; padding: 14px; width: 100%;
+    border-radius: 8px; cursor: pointer; font-size: 1.1rem; font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+    display: flex; justify-content: center; align-items: center; gap: 10px;
 }
-.action-button:hover {
-    background-color: #7b1fa2;
-    transform: scale(1.03);
-}
+.action-button:hover { background-color: #7b1fa2; transform: scale(1.03); }
 
-/* Modal do Carrinho */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.7);
-    backdrop-filter: blur(5px);
-}
-
-.modal-content {
-    background-color: #1e1e1e;
-    padding: 25px;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    right: -100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.close-button {
-    color: #aaa;
-    align-self: flex-end;
-    font-size: 35px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-#cart-items {
-    margin-top: 20px;
-    flex-grow: 1;
-    overflow-y: auto;
-}
-
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 5px;
-    border-bottom: 1px solid #444;
-}
-
-.cart-item-info h5 {
-    margin: 0 0 5px 0;
-    font-size: 1rem;
-}
-
-.cart-item-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-.cart-item-actions button {
-    background: var(--primary-color);
-    border: none;
-    color: white;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    transition: transform 0.2s;
-}
-.cart-item-actions button:active {
-    transform: scale(0.9);
-}
-
-.cart-summary {
-    margin-top: 20px;
-    text-align: right;
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 20px 0;
-}
-
-#checkout-button {
-    background-color: #25D366;
-}
-#checkout-button:hover {
-    background-color: #128C7E;
-}
-
-/* Toast Notification */
-.toast {
-    position: fixed;
-    bottom: -100px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--primary-color);
-    color: white;
-    padding: 12px 25px;
-    border-radius: 50px;
-    transition: bottom 0.5s ease-in-out;
-    z-index: 3000;
-    font-weight: bold;
-}
-.toast.show {
-    bottom: 90px;
-}
-
-.whatsapp-float {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 25px;
-    right: 25px;
-    background-color:#25D366;
-    color:#FFF;
-    border-radius:50px;
-    text-align:center;
-    font-size:30px;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
-    z-index:100;
-}
+/* O CSS do Modal, Toast, WhatsApp e Footer permanece o mesmo */
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+.modal-content { background-color: #1e1e1e; padding: 25px; width: 100%; height: 100%; position: fixed; top: 0; right: -100%; display: flex; flex-direction: column; }
+.close-button { color: #aaa; align-self: flex-end; font-size: 35px; font-weight: bold; cursor: pointer; }
+#cart-items { margin-top: 20px; flex-grow: 1; overflow-y: auto; }
+.cart-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 5px; border-bottom: 1px solid #444; }
+.cart-item-info h5 { margin: 0 0 5px 0; font-size: 1rem; }
+.cart-item-actions { display: flex; align-items: center; gap: 12px; }
+.cart-item-actions button { background: var(--primary-color); border: none; color: white; width: 30px; height: 30px; cursor: pointer; border-radius: 50%; font-size: 1.2rem; transition: transform 0.2s; }
+.cart-item-actions button:active { transform: scale(0.9); }
+.cart-summary { margin-top: 20px; text-align: right; font-size: 1.5rem; font-weight: bold; padding: 20px 0; }
+#checkout-button { background-color: #25D366; }
+#checkout-button:hover { background-color: #128C7E; }
+.toast { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background-color: var(--primary-color); color: white; padding: 12px 25px; border-radius: 50px; transition: bottom 0.5s ease-in-out; z-index: 3000; font-weight: bold; }
+.toast.show { bottom: 90px; }
+.whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 25px; right: 25px; background-color:#25D366; color:#FFF; border-radius:50px; text-align:center; font-size:30px; box-shadow: 2px 2px 8px rgba(0,0,0,0.4); z-index:100; }
 .whatsapp-float i { margin-top: 15px; }
-
-footer {
-    text-align: center;
-    padding: 25px 0;
-    margin-top: 40px;
-    background: var(--secondary-color);
-    font-size: 0.9rem;
-}
+footer { text-align: center; padding: 25px 0; margin-top: 40px; background: var(--secondary-color); font-size: 0.9rem; }
