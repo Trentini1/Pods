@@ -141,3 +141,13 @@ main { padding-top: 80px; }
 .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 25px; right: 25px; background-color:#25D366; color:#FFF; border-radius:50px; text-align:center; font-size:30px; box-shadow: 2px 2px 8px rgba(0,0,0,0.4); z-index:100; }
 .whatsapp-float i { margin-top: 15px; }
 footer { text-align: center; padding: 25px 0; margin-top: 40px; background: var(--secondary-color); font-size: 0.9rem; }
+
+.action-button.out-of-stock {
+    background-color: #555;
+    cursor: not-allowed;
+    color: #999;
+}
+.action-button.out-of-stock:hover {
+    transform: none; /* Remove o efeito de hover */
+    background-color: #555;
+}
