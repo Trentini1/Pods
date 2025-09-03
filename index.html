@@ -23,21 +23,38 @@
     </header>
 
     <main class="container">
-        <section id="hero" class="fade-in-up">
-            <h2>Os Melhores Pods Descartáveis</h2>
-            <p>Qualidade e sabor que você nunca viu. Entrega rápida em Curitiba e região!</p>
-        </section>
+        <nav class="tabs-nav fade-in-up">
+            <button class="tab-link active highlighted" data-tab="black-sheep">
+                <i class="fas fa-star"></i> Black Sheep
+            </button>
+            <button class="tab-link highlighted" data-tab="elf-bar">
+                <i class="fas fa-star"></i> Elf Bar
+            </button>
+            <button class="tab-link highlighted" data-tab="ignite">
+                <i class="fas fa-star"></i> Ignite
+            </button>
+            <button class="tab-link" data-tab="sex-addict">
+                Sex Addict
+            </button>
+        </nav>
 
-        <section id="products">
-            </section>
+        <section class="tabs-content">
+            <div id="black-sheep" class="tab-content-panel active">
+                </div>
+            <div id="elf-bar" class="tab-content-panel">
+                </div>
+            <div id="ignite" class="tab-content-panel">
+                </div>
+            <div id="sex-addict" class="tab-content-panel">
+                </div>
+        </section>
     </main>
 
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h2>Seu Carrinho</h2>
-            <div id="cart-items">
-                </div>
+            <div id="cart-items"></div>
             <div class="cart-summary">
                 <p>Total: <span id="cart-total-price">R$0,00</span></p>
             </div>
